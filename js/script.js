@@ -13,7 +13,7 @@
 * - privat - в это свойство поместить boolean(логическое) значение false. **/
 
 
-const numberOfFilms = +prompt("Сколько фильмов вы уже посмотрели?", "");
+const numberOfFilms = prompt("Сколько фильмов вы уже посмотрели?", "");
 console.log(numberOfFilms);
 
 const personalMovieDB = {
@@ -24,13 +24,29 @@ const personalMovieDB = {
     privat : false
 };
 
-const lastWatchFilm1 = prompt("Один из последних просмотренних фильмов?", "");
-const ballFilm1 = +prompt("Насколько оцените его?", "");
-const lastWatchFilm2 = prompt("Один из последних просмотренних фильмов?", "");
-const ballFilm2 = +prompt("Насколько оцените его?", "");
+for(let i = 0; i < 2; i++) {
 
-personalMovieDB.movies[lastWatchFilm1] = ballFilm1;
-personalMovieDB.movies[lastWatchFilm2] = ballFilm2;
+    const lastWatchFilm = prompt("Один из последних просмотренних фильмов?", "");
+    const ballFilm = +prompt("Насколько оцените его?", "");
 
+    if (lastWatchFilm.length != null && ballFilm != null
+        && lastWatchFilm != "" && ballFilm != ""
+        && lastWatchFilm.length < 50) {
+        console.log("done");
+    } else {
+        console.log("error");
+        i--;
+    }
+    personalMovieDB.movies[lastWatchFilm] = ballFilm;
+}
+
+if (personalMovieDB.count < 10) {
+    console.log("Просмотренно довольно мало фильмов.");
+} else if (10 <= personalMovieDB.count && personalMovieDB.count <= 30) {
+    console.log("Вы классический зритель.");
+} else  if (personalMovieDB.count > 30) {
+    console.log("Вы киноман.");
+}
 
 console.log(personalMovieDB)
+
